@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <section>
+    <add key="a" value="modified_a" xdt:Locator="Match(key)" xdt:Transform="Replace"/>
+    <add key="email" value="test-{name}@domain.com" xdt:Locator="Match(key)" xdt:Transform="Replace"/>
+  </section>
+  <compile xdt:Transform="RemoveAttributes(debug)"/>
+</root>

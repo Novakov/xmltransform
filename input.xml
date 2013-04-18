@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <section>
+    <add key="a" value="orig_a" />
+    <add key="b" value="orig_b" />
+    <add key="email" value="e-mail" />
+  </section>
+  <compile debug="true">
+
+  </compile>
+  <rest />
+</root>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>XmlTransform</id>
+    <version>1.0.0.0</version>
+    <title>XmlTransform utitlity</title>
+    <authors>Maciej Nowak</authors>
+    <owners>Maciej Nowak</owners>    
+    <projectUrl>http://github.com/Novakov/xmltransform</projectUrl>    
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple application which allows to transform one XML file into another using XDT transformations</description>        
+    <tags>xml xdt transform build</tags>
+  </metadata>
+</package>

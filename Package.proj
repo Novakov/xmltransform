@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Package">
+  <PropertyGroup>
+    <NuGet Condition="'$(NuGet)' == ''">$(MSBuildProjectDirectory)\packages\NuGet.CommandLine.2.2.1\tools\NuGet.exe</NuGet>
+    <BaseDir Condition="'$(BaseDir)' == ''">$(MSBuildProjectDirectory)\package</BaseDir>
+  </PropertyGroup>
+  
+  <Target Name="Package">
+    <Exec Command="rd /s /q &quot;$(BaseDir)&quot;" />
+    <MakeDir Directories="$(BaseDir);$(BaseDir)\tools" />
+
+    <MSBuild Projects="XmlTransform.sln" Properties="Configuration=Release;OutDir=$(BaseDir)\tools\" />
+    <Copy SourceFiles="XmlTransform\XmlTransform.nuspec" DestinationFolder="$(BaseDir)" />
+    <Exec Command="&quot;$(NuGet)&quot; pack XmlTransform.nuspec" WorkingDirectory="$(BaseDir)\" />    
+  </Target>
+</Project>

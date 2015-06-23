@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -63,6 +64,8 @@ namespace XmlTransform
                 return;
             }
 
+            var contentsBeforeTransformation = File.ReadAllBytes(opts.InputFile);
+
             if (!File.Exists(opts.TransformFile))
             {
                 Console.WriteLine("Transform file {0} doesn't exists", opts.TransformFile);
@@ -102,9 +105,22 @@ namespace XmlTransform
 
             transform.ApplyTo(doc);
 
-            using (var writer = XmlWriter.Create(opts.OutputFile, new XmlWriterSettings { Indent = true }))
+            var outputStream = new MemoryStream();
+            using (var writer = XmlWriter.Create(outputStream, new XmlWriterSettings {Indent = true}))
             {
                 doc.WriteTo(writer);
+            }
+
+            var contentsAfterTransformation = outputStream.ToArray();
+
+            if (!contentsBeforeTransformation.SequenceEqual(contentsAfterTransformation))
+            {
+                outputStream.Position = 0;
+                using (var fs = File.Create(opts.OutputFile))
+                {
+                    outputStream.CopyTo(fs);
+                    fs.Close();
+                }
             }
         }
     }
